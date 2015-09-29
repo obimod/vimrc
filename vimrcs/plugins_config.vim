@@ -53,6 +53,15 @@ map <c-b> :CtrlPBuffer<cr>
 let g:ctrlp_max_height = 20
 let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 
+" Per github.com:smathieu/vim/blob/master/.vimrc#L112
+function! ClearAllCtrlPCachesOnNewFile()
+  if !filereadable(expand('%'))
+    ClearAllCtrlPCaches
+  endif
+endfunction
+
+au BufWritePre * call ClearAllCtrlPCachesOnNewFile()
+
 """"""""""""""""""""""""""""""
 " => ZenCoding
 """"""""""""""""""""""""""""""
