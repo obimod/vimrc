@@ -11,6 +11,7 @@
 " Set font according to system
 if has("mac") || has("macunix")
     set gfn=Source\ Code\ Pro:h15,Menlo:h15
+    autocmd filetype crontab setlocal nobackup nowritebackup
 elseif has("win16") || has("win32")
     set gfn=Source\ Code\ Pro:h12,Bitstream\ Vera\ Sans\ Mono:h11
 elseif has("linux")
@@ -32,14 +33,9 @@ set guioptions-=l
 set guioptions-=L
 
 " Colorscheme
-if has("gui_running")
-    set background=dark
-    colorscheme peaksea
-else
-    colorscheme desert
-    let g:colors_name="desert"
-endif
-
+set background=dark
+colorscheme molokai
+let g:colors_name="molokai"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fast editing and reloading of vimrc configs
