@@ -76,7 +76,7 @@ nmap <leader>w :w!<cr>
 
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
-command W w !sudo tee % > /dev/null
+command! W w !sudo tee % > /dev/null
 
 set noswapfile
 
@@ -254,6 +254,7 @@ map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
+map <leader>tr :TabooRename
 map <leader>t<leader> :tabnext
 
 " Let 'tl' toggle between this and the last accessed tab

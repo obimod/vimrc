@@ -141,7 +141,7 @@ augroup AuNERDTreeCmd
 autocmd AuNERDTreeCmd FocusGained * call s:UpdateNERDTree()
 augroup END
 
-function s:UpdateNERDTree(...)
+function! s:UpdateNERDTree(...)
   let stay = 0
 
   if(exists("a:1"))
