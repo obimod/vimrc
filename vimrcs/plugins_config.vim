@@ -28,17 +28,6 @@ map <leader>o :BufExplorer<cr>
 let MRU_Max_Entries = 400
 map <leader>f :MRU<CR>
 
-
-""""""""""""""""""""""""""""""
-" => YankRing
-""""""""""""""""""""""""""""""
-if has("win16") || has("win32")
-    " Don't do anything
-else
-    let g:yankring_history_dir = '~/.vim_runtime/temp_dirs/'
-endif
-
-
 """"""""""""""""""""""""""""""
 " => CTRL-P
 """"""""""""""""""""""""""""""
@@ -51,22 +40,26 @@ map <leader>j :CtrlP<cr>
 map <c-b> :CtrlPBuffer<cr>
 
 " Use SilverSearcher
-if executable('ag')
+if executable('ag') || executable('Ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
   if executable('ag')
     let g:ackprg = 'ag --vimgrep'
   endif
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+  let g:ctrlp_user_command = 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$\|bower$\|node_modules$\|DS_Store\|public$"'
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
+else
+  " Fall back to using git ls-files if Ag is not available
+  let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|git|dist|public|bower|swp)|(\.(swp|ico|git|svn|DS_Store))$'
+
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
 endif
 
 let g:ctrlp_max_height = 20
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|git|dist|public|bower|swp)|(\.(swp|ico|git|svn|DS_Store))$'
-
+"let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|\.git|dist|public|bower|swp)|(\.(swp|ico|git|svn|DS_Store))'
 function! ClearAllCtrlPCachesOnNewFile()
   if !filereadable(expand('%'))
       ClearAllCtrlPCaches

@@ -96,6 +96,7 @@ source $VIMRUNTIME/menu.vim
 set wildmenu
 
 " Ignore compiled files
+" Do not apply with CtrlP
 set wildignore=*.o,*~,*.pyc
 if has("win16") || has("win32")
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
@@ -159,13 +160,6 @@ set foldcolumn=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
 syntax enable
-
-try
-    colorscheme monokai
-catch
-endtry
-
-set background=dark
 
 " Set extra options when running in GUI mode
 if has("gui_running")
